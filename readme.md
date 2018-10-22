@@ -48,7 +48,7 @@ If the primary key is known, thats indexed for free by the filesystem
 
 Use the index named 'username' for type 'user' to find the specific username of 'somebob'.
 ```javascript
-  let index = indexes['user'].indexes[0]
+  let index = schema['user'].indexes[0]
   let key = 'somebob'
   let user_id = idfx.get('user', index, key)
   let user = idfx.loadFile(user_id)
@@ -59,7 +59,7 @@ Note in the range query both the keys and values are returned. In a simple retri
 key is known beforehand, but in a range query the specific keys are part of the answer and 
 can sometimes contain information to satisfy the query without loading the data object.
 ```javascript
-  let index = indexes['location'].indexes[0]
+  let index = schema['location'].indexes[0]
   let start = new Date("2018-08-01").toISOString()
   let stop = new Date().toISOString()
   let idx_kvs = this.getIdxBetween('location', 'user_id_date', 
