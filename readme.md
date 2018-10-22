@@ -41,7 +41,7 @@ Index properties are the &lt;name&gt;, the fields that make up the key [&lt;fiel
       ]
 ```
 
-If the primary key is known, thats already indexed for free in the filesystem
+If the primary key is known, thats indexed for free by the filesystem
 ```javascript
   let user = idfx.loadFile('57c0e740-d636-11e8-97d2-3358493f968d')
 ```
@@ -54,15 +54,18 @@ Use the index named 'username' for type 'user' to find the specific username of 
   let user = idfx.loadFile(user_id)
 ```
 
-Use the index named 'user_id_date' for type 'location' to find a range of values for the user_id above.
+Use the index named 'user_id_date' for type 'location' to find a range of values for a user_id.
+Note in the range query both the keys and values are returned. In a simple retrieve query the
+key is known beforehand, but in a range query the specific keys are part of the answer and 
+can sometimes contain information to satisfy the query without loading the data object.
 ```javascript
   let index = indexes['location'].indexes[0]
   let start = new Date("2018-08-01").toISOString()
   let stop = new Date().toISOString()
-  let location_ids = this.getIdxBetween('location', 'user_id_date', 
+  let idx_kvs = this.getIdxBetween('location', 'user_id_date', 
                                         [user_id, start],
                                         [user_id, stop])
-  let locations = location_ids.map(id => idfx.loadFile(id))
+  let locations = Object.keys(idx_kvs).map(ikey => idfx.loadFile(idx_kvs[ikey]))
 
 ```
 
