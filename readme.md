@@ -26,6 +26,7 @@ The indexes can be destroyed and rebuilt using only the data object
 and the index definitions. idfxdb will build missing indexes at startup.
 
 ## Indexes 
+```javascript
   let schema = {
     'user': {
       indexes: [
@@ -33,6 +34,7 @@ and the index definitions. idfxdb will build missing indexes at startup.
         ['email', ['email'], { unique: true, lowercase: true }]
       ]
     }
+```
 
 ## Status
 This code is working inside the icecondor project's node server. It will be
