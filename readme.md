@@ -1,6 +1,6 @@
 ## idfxdb
 idfxdb manages a configurable set of indexes used to query a set of data objects. 
-It aims to be an efficient system to read/write large sets of data objects using 
+It aims to be an efficient system to read/write large sets of data using 
 a minimal amount of ram/small virtual server. 
 
 A data object is a set of fields that describe the object (such as a javascript object, 
