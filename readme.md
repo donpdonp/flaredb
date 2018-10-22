@@ -54,10 +54,13 @@ Use the index named 'username' for type 'user' to find the specific username of 
   let user = idfx.loadFile(user_id)
 ```
 
-Use the index named 'user_id_date' for type 'location' to find a range of values for a user_id.
+Use the index named 'user_id_date' for type 'location' to find a range of values for a user_id
+between the date strings for 2018-08-01 and now.
+
 Note in the range query both the keys and values are returned. In a simple retrieve query the
 key is known beforehand, but in a range query the specific keys are part of the answer and 
 can sometimes contain information to satisfy the query without loading the data object.
+
 ```javascript
   let index = schema['location'].indexes[0]
   let start = new Date("2018-08-01").toISOString()
@@ -77,5 +80,6 @@ extracted into this repo and improved.
 * data object read/write configurable functions (currently fixed to json/filesystem)
 * in-project library or RPC mechanism - http, zeromq
 * adapt to node's levelup? not sure it supports the required attributes that lmdb has
+* binary key values+length instead of utf8 string+seperator
 
 
