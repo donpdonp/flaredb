@@ -1,7 +1,7 @@
 ## idfxdb
 idfxdb manages a configurable set of indexes used to query a set of data objects. 
 It aims to be an efficient system to read/write large sets of data objects using 
-a minimal amount of RAM. 
+a minimal amount of ram/small virtual servers. 
 
 A data object is a set of fields that describe the object (such as a javascript object, 
 a python dictionary, a ruby hash, etc.) idfxdb expects objects to have two properties, 
@@ -14,7 +14,9 @@ an index key. The index value is the primary key of the data object.
 The index key/values are kept in lmdb which is an ordered (btree), atomic, mmap-backed
 key/value store. 
 Only the pages of the btree needed to retrieve the
-index keys for a given query are needed in memory. 
+index keys for a given query are needed in memory. This keeps memory
+usage very low as the database does not try to allocate space to 
+hold the data objects themselves.
 
 
 The index schema defines which indexes exist for which kinds of objects.
