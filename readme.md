@@ -25,7 +25,8 @@ The indexes are seperate and secondary to the data objects on disk.
 The indexes can be destroyed and rebuilt using only the data object
 and the index definitions. idfxdb will build missing indexes at startup.
 
-## Indexes 
+## Usage 
+Index properties are the <name>, the fields that make up the key [<field1>, ...], and config options.
 ```javascript
   let schema = {
     'user': {
@@ -33,7 +34,36 @@ and the index definitions. idfxdb will build missing indexes at startup.
         ['username', ['username'], { unique: true, lowercase: true }],
         ['email', ['email'], { unique: true, lowercase: true }]
       ]
-    }
+    },
+    'location': {
+      indexes: [
+        ['user_id_date', ['user_id', 'date'], {}]
+      ]
+```
+
+If the primary key is known, thats already indexed for free in the filesystem
+```javascript
+  let user = idfx.loadFile('57c0e740-d636-11e8-97d2-3358493f968d')
+```
+
+Use the index named 'username' for type 'user' to find the specific username of 'somebob'.
+```javascript
+  let index = indexes['user'].indexes[0]
+  let key = 'somebob'
+  let user_id = idfx.get('user', index, key)
+  let user = idfx.loadFile(user_id)
+```
+
+Use the index named 'user_id_date' for type 'location' to find a range of values for the user_id above.
+```javascript
+  let index = indexes['location'].indexes[0]
+  let start = new Date("2018-08-01").toISOString()
+  let stop = new Date().toISOString()
+  let location_ids = this.getIdxBetween('location', 'user_id_date', 
+                                        [user_id, start],
+                                        [user_id, stop])
+  let locations = location_ids.map(id => idfx.loadFile(id))
+
 ```
 
 ## Status
