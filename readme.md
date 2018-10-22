@@ -16,7 +16,6 @@ key/value store.
 Only the pages of the btree needed to retrieve the
 index keys for a given query are needed in memory. 
 
-
 The index schema defines which indexes exist for which kinds of objects.
 
 * The only values that can be queried are values that are part of an index 
@@ -26,7 +25,22 @@ The indexes are seperate and secondary to the data objects on disk.
 The indexes can be destroyed and rebuilt using only the data object
 and the index definitions. idfxdb will build missing indexes at startup.
 
+## Indexes 
+  let schema = {
+    'user': {
+      indexes: [
+        ['username', ['username'], { unique: true, lowercase: true }],
+        ['email', ['email'], { unique: true, lowercase: true }]
+      ]
+    }
 
+## Status
+This code is working inside the icecondor project's node server. It will be
+extracted into this repo and improved.
 
+## Roadmap
+* data object read/write configurable functions (currently fixed to json/filesystem)
+* in-project library or RPC mechanism - http, zeromq
+* adapt to node's levelup? not sure it supports the required attributes that lmdb has
 
 
