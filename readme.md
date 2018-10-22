@@ -26,7 +26,7 @@ The indexes can be destroyed and rebuilt using only the data object
 and the index definitions. idfxdb will build missing indexes at startup.
 
 ## Usage 
-Index properties are the <name>, the fields that make up the key [<field1>, ...], and config options.
+Index properties are the &lt;name&gt;, the fields that make up the key [<field1>, ...], and config options.
 ```javascript
   let schema = {
     'user': {
