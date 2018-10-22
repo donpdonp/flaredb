@@ -10,13 +10,11 @@ field which groups objects together
 (such as 'user' or 'location').
 
 An index copies fields on the data object to build
-an index key. The index value is the primary key of the data object. 
+an index key. The index value is the 'id' field of the data object. 
 The index key/values are kept in lmdb which is an ordered (btree), atomic, mmap-backed
 key/value store. 
 Only the pages of the btree needed to retrieve the
-index keys for a given query are needed in memory. This keeps memory
-usage very low as the database does not try to allocate space to 
-hold the data objects themselves.
+index keys for a given query are needed in memory. 
 
 
 The index schema defines which indexes exist for which kinds of objects.
