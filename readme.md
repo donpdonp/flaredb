@@ -1,5 +1,5 @@
-## idfxdb
-idfxdb manages a configurable set of indexes used to query a set of data objects. 
+## flaredb
+flaredb manages a configurable set of indexes used to query a set of data objects. 
 It aims to be an efficient system to read/write large sets of data using 
 a minimal amount of ram/small virtual server. 
 
@@ -71,6 +71,22 @@ can sometimes contain information to satisfy the query without loading the data 
   let locations = Object.keys(idx_kvs).map(ikey => idfx.loadFile(idx_kvs[ikey]))
 
 ```
+
+## Architecture choices
+
+Langs
+  * go
+  * zig
+
+Index store
+  * lmdb
+
+Object serialization
+  * json
+  * protobuf
+
+Object store
+  * filesystem
 
 ## Status
 This code is working inside the icecondor project's node server. It will be
