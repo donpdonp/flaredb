@@ -78,6 +78,10 @@ Langs
   * go
   * zig
 
+RPC
+  * library/in-process
+  * nng/mangos/Scalability Protocol
+
 Index store
   * lmdb
 
